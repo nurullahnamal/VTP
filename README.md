@@ -1,6 +1,16 @@
 # VTP Modları ve Konfigürasyonu (Cisco Switch)<br>
 
 VTP Nedir, Ne İşe Yarar ve Hangi Mod Ne Amaçla Kullanılır? <br>
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/Ads%C4%B1z.png)
+
+
+
+
+
+
+
+
+
 
 Büyük ağ yapılarında, birden fazla switch’in bulunduğu ortamlarda VLAN yönetimini tek tek her switch üzerinde yapmak hem zaman alıcıdır hem de hata riskini artırır. Bu sorunu çözmek için Cisco’nun sunduğu VTP (VLAN Trunking Protocol) protokolü devreye girer.
 VTP sayesinde, VLAN’lar merkezi bir switch üzerinden tanımlanır ve trunk bağlantılar aracılığıyla diğer switch’lere otomatik olarak iletilir. Bu yapı, ağ yöneticisine merkezi, kolay ve hızlı VLAN yönetimi sağlar. <br>
@@ -21,7 +31,7 @@ VLAN bilgileri versiyon numarası (revision number) ile eşleştirilir. Yeni bil
 Switch’ler arasında trunk bağlantı varsa, bu bağlantılar üzerinden VLAN bilgileri kolayca paylaşılır.<br>
 6. Büyük Kurumsal Ağlarda Ölçeklenebilirlik<br>
 Özellikle çok sayıda switch içeren yapılarda yapılandırma ve yönetimi oldukça kolaylaştırır.<br>
-
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/192.168.10.10%20to%20192.168.10.100mp4.gif)
 
 Hangi Mod Ne Zaman Seçilmeli?<br>
 
@@ -32,14 +42,14 @@ Hangi Mod Ne Zaman Seçilmeli?<br>
 🔹 Transparent: Ayrı bir yapı kurmak istenen veya VLAN bilgisinin yayılmasını istemediğin özel switchler. <br>
 
 Şimdi ise yapılandırma adımlarını inceleyelim.<br>
-
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/BB%20switch%20vlanlar.png)
 VTP Server Switch Konfigürasyonu (Backbone Switch)<br>
 enable                      # Yetkili (privileged) moda geçiş <br>
 configure terminal          # Global konfigürasyon moduna giriş <br>
 vtp mode server             # VTP modunu "Server" olarak ayarla <br>
 vtp domain ccna             # VTP domain adını "ccna" olarak ayarla <br>
 vtp password 1234           # VTP şifresini "1234" olarak ayarla <br>
-
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/Client%20show%20vtp%20status.png)
 VLAN Tanımları <br>
 vlan 10                     # VLAN 10’u oluştur  <br>
  name data1                 # VLAN 10’a "data1" ismini ver  <br>
@@ -51,7 +61,7 @@ vlan 40 <br>
  name data4 <br>
 vlan 50 <br>
  name data5 <br>
-
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/show%20vtp%20status%20server%20mode.png)
 oluşturulan vlanlar <br>
 Trunk Port Ayarı <br>
 interface gigabitEthernet 0/1   # G0/1 arayüzünü seç <br>
@@ -69,6 +79,7 @@ Trunk Port Ayarı <br>
 interface gigabitEthernet 0/1 <br>
  switchport mode trunk          # Trunk port olarak ayarlanır <br>
  <br>
+  ![image alt](https://github.com/nurullahnamal/VTP/blob/main/transparant%20mode.png)
 transparent mod da vlanları göremiyoruz. <br>
 Client Portlarını Trunk Moda Alma: <br>
 interface fastEthernet 0/1 <br>
@@ -102,7 +113,7 @@ vtp password 1234 <br>
  <br>
 interface fastEthernet 0/1 <br>
  switchport mode trunk <br>
-
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/transparant%20mod%20da%20vlanlar%C4%B1%20g%C3%B6remiyoruz.png)
 end <br>
 show vtp status <br>
 Client Switch 3 Konfigürasyonu <br>
@@ -117,10 +128,11 @@ interface fastEthernet 0/1 <br>
 
 end <br>
 show vtp status <br>
-
+ ![image alt](https://github.com/nurullahnamal/VTP/blob/main/vtp%20192.168.10.10%20to%20192.168.10.100.png)
 
 Test 192.168.10.10 dan 192.168.10.100 ping atma <br>
 Dikkat Edilmesi Gerekenler <br>
+
 Yanlışlıkla başka bir switch’i server modda ağa dahil etmek tüm ağı etkileyebilir. <br>
 Revision Number yüksek bir switch, yanlış VLAN’ları tüm ağa yayabilir. <br>
 👉 Bu yüzden “transparent” mod” ya da revision reset dikkatle yapılmalı <br>
